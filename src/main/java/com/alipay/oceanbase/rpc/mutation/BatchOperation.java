@@ -260,6 +260,9 @@ public class BatchOperation {
                 TableQuery query = (TableQuery) operation;
                 batchOps.get(query.getRowKey().getValues(),
                     query.getSelectColumns().toArray((new String[0])));
+            } else if (operation instanceof Get) {
+                Get get = (Get) operation;
+                batchOps.get(get.getRowKey().getValues(), get.getSelectColumns());
             } else {
                 throw new ObTableException("unknown operation " + operation);
             }
